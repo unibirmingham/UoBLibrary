@@ -10,135 +10,37 @@
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
 		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js" type="text/javascript"></script>
 
-		<script src="scripts/login.js" type="text/javascript"></script>
-		<script src="scripts/location.js" type="text/javascript"></script>
+		<script src="scripts/utilities.js" type="text/javascript" charset="utf-8"></script>
+		<script src="scripts/libraries.js" type="text/javascript" charset="utf-8"></script>
 
-		<script type="text/javascript">
-			$(function() {
-					$.getJSON("js/libraries.json", function(data){
-						var output = '';
-						$.each(data, function (index, value) {
-							output += '<li><a href="#">' + value.name + '</a></li>';
-							});
-						$('#libraryList').html(output).listview("refresh");
-						});
-					});
-				</script>
+	</head>
+	<body>
 
-			</head>
-			<body>
+		<!--List of libraries-->
+		<div id="library-list" data-role="page">
+			<!--Header-->
+			<div data-role="header" data-position="fixed">
+				<h1>Libraries</h1>
+			</div>
 
-				<!--Home-->
-				<div id="page-home" data-role="page">
+			<!--Content-->
+			<div data-role="content">
+				<ul data-role="listview" id="libraryList">
+				</ul>
+			</div>
 
-					<!--Header-->
-					<div data-role="header" data-position="fixed">
-						<h1>Home!</h1>
-					</div>
+			<!--Footer-->
+			<div data-role="footer" data-position="fixed" data-id="oneFooter">
+			</div>
+		</div>
 
-					<!--Content-->
-					<div data-role="content">
-					</div>
-					<div class="nav" id="libraryList">
-						<ul data-role="listview">
-							<li><a href="main_library.html">
-								<h2>Main Library</h2>
-							</a>	
-							</li>
-						</ul>
-					</div>
+		<!-- Library record -->
+		<div id="library-record" data-role="page">
+			<div data-role="content">
+			</div>
+		</div>
 
-					<!--Footer-->
-					<div data-role="footer" data-position="fixed" data-id="oneFooter">
-						<span class="footerText">Built with Telerik AppBuilder&trade;</span>
-					</div>
-
-				</div>
-
-				<!--UI interaction-->
-				<div id="page-ui-interaction" data-role="page" data-add-back-btn="true">
-
-					<!--Header-->
-					<div data-role="header" data-position="fixed">
-						<h1>Login</h1>
-					</div>
-
-					<!--Content-->
-					<div data-role="content">
-						<div id="login-wrap">
-							<form data-ajax="false" id="login-form">
-								<h3 id="login-text">Enter your credentials:</h3>
-								<div>
-									<input id="login-username" type="text" placeholder="Username" />
-									<input id="login-password" type="password" placeholder="Password" />
-								</div>
-
-								<div class="buttons ui-bar">
-									<div>
-										<div class="left">
-											<input type="submit" id="login" data-icon="check" data-inline="true" class="left" value="Login" />
-										</div>
-										<div class="right">
-											<button id="login-reset" data-icon="delete" data-inline="true" class="right">Reset</button>
-										</div>
-										<div class="clear"></div>
-									</div>
-								</div>
-							</form>
-						</div>
-
-						<div id="logout-wrap">
-							<div>
-								<h1 class="welcome">Welcome, <span id="logout-username"></span>!
-								</h1>
-							</div>
-
-							<div class="buttons">
-								<div data-role="controlgroup" data-type="horizontal">
-									<button id="logout" data-icon="back">Logout</button>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!--Footer-->
-					<div data-role="footer" data-position="fixed" data-id="oneFooter">
-						<span class="footerText">Built with Telerik AppBuilder&trade;</span>
-					</div>
-
-				</div>
-
-				<!--Location-->
-				<div id="page-location" data-role="page" data-add-back-btn="true">
-
-					<!--Header-->
-					<div id="page-location-header" data-role="header" data-position="fixed">
-						<h1>Location</h1>
-					</div>
-
-					<!--Content-->
-					<div id="page-location-content" data-role="content">
-						<div id="map-search-wrap">
-							<a id="map-navigate-home"></a>
-							<form data-ajax="false" onsubmit="return false;">
-								<input id="map-address" type="search" data-role="none" placeholder="Address" />
-								<input id="map-search" type="submit" value="" data-role="none" />
-							</form>
-						</div>
-						<div id="map-canvas"></div>
-					</div>
-
-					<!--Footer-->
-					<div id="page-location-footer" data-role="footer" data-position="fixed" data-id="oneFooter">
-						<span class="footerText">Built with Telerik AppBuilder&trade;</span>
-					</div>
-
-				</div>
-				<script type="text/javascript">
-					document.addEventListener('deviceready', function () {
-							navigator.splashscreen.hide();
-							}, false);
-						</script>
-					</body>
-				</html>
+	</body>
+</html>
