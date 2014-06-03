@@ -1,0 +1,16 @@
+{
+	"libraries": [
+	{
+		"id": "1",
+		"name": "Main Library",
+		"email": "mainlibrary@bham.ac.uk",
+		"telephone": "01214128282"
+	},
+	{
+		"id": "2",
+		"name": "the Main Library",
+		"email": "mainlibrary@bham.ac.uk",
+		"telephone": "01214128282"
+	}
+	]
+}
