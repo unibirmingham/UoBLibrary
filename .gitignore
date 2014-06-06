@@ -1,3 +1,7 @@
 */bin
 */obj
 *.user-settings.xml
+*.swp
+*.swo
+*.swn
+
