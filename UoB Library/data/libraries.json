@@ -3,14 +3,78 @@
 	{
 		"id": "1",
 		"name": "Main Library",
-		"email": "mainlibrary@bham.ac.uk",
-		"telephone": "01214128282"
+		"email": "",
+		"telephone": "+44 121 414 5828",
+		"lat": 52.451464,
+		"long": -1.930295,
+		"image": "images/main-library.jpg",
+		"address":"The Main Library,University of Birmingham,Edgbaston,Birmingham,B15 2TT"
 	},
 	{
 		"id": "2",
-		"name": "the Main Library",
-		"email": "mainlibrary@bham.ac.uk",
-		"telephone": "01214128282"
+		"name": "Barber Fine Art Library",
+		"email": "fine-arts-library@bham.ac.uk",
+		"telephone": "+441214147334",
+		"location": "52.450329,-1.927696",
+		"address":"Barber Fine Art Library, Barber Institute of Fine Arts, University of Birmingham, B15 2TT"
+	},
+	{
+		"id": "3",
+		"name": "Barber Music Library",
+		"email": "music-library@bham.ac.uk",
+		"telephone": "+441214145852",
+		"location": "52.450329,-1.927696"
+	},
+	{
+		"id": "4",
+		"name": "Barnes Library",
+		"email": "ba-lib@bham.ac.uk",
+		"telephone": "+441214143567",
+		"location": ""
+	},
+	{
+		"id": "5",
+		"name": "Cadbury Research Library",
+		"email": "special-collections@bham.ac.uk",
+		"telephone": "+441214145839",
+		"location": ""
+	},
+	{
+		"id": "6",
+		"name": "Education Library",
+		"email": "edlib@bham.ac.uk",
+		"telephone": "+441214144869",
+		"location": ""
+	},
+	{
+		"id": "7",
+		"name": "Harding Law Library",
+		"email": "law-lib@bham.ac.uk",
+		"telephone": "+441214145865",
+		"location": ""
+	},
+	{
+		"id": "8",
+		"name": "Orchard Learning Resource Centre",
+		"email": "orlc@bham.ac.uk",
+		"telephone": "+441214158454",
+		"location": ""
+	},
+	{
+		"id": "9",
+		"name": "Ronald Cohen Dental Library",
+		"email": "dllib@bham.ac.uk",
+		"telephone": "+441212372859",
+		"location": "",
+		"lat":52.485629,
+		"long":-1.895247
+	},
+	{
+		"id": "10",
+		"name": "Shakespeare Institute Library",
+		"email": "silib@bham.ac.uk",
+		"telephone": "+441214149525",
+		"location": ""
 	}
 	]
 }

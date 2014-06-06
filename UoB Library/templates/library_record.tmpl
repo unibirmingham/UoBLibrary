@@ -1,1 +1,26 @@
-<h1>{{name}}</h1>
+<div class="ui-grid-a">
+	<div class="ui-block-a">
+		{{#if address}}
+		<address>
+			{{{formattedAddress address}}}
+		</address>
+		{{/if}}
+	</div>
+	<div class="ui-block-b">
+		{{#if image}}
+		<img src="{{image}}" class="library-thumb" />
+		{{else}}
+		<img src="/images/library-thumb-default.jpg" class="library-thumb" />
+		{{/if}}
+	</div>
+</div><!-- /grid-a -->
+<dl class="clear">
+	{{#if telephone}}
+	<dt>Phone</dt>
+	<dd><a href="phone:{{telephone}}">{{telephone}}</a></dd>
+	{{/if}}
+	{{#if email}}
+	<dt>Email</dt>
+	<dd><a href="email:{{email}}">{{email}}</a></dd>
+	{{/if}}
+</dl>

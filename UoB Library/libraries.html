@@ -6,14 +6,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
 		<link href="styles/main.css" rel="stylesheet" />
+		<link href="styles/libraries.css" rel="stylesheet" />
 
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
 		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js" type="text/javascript"></script>
+		<script src="scripts/handlebars-v1.3.0.js" type="text/javascript"></script>
 
 		<script src="scripts/utilities.js" type="text/javascript" charset="utf-8"></script>
 		<script src="scripts/libraries.js" type="text/javascript" charset="utf-8"></script>
+
+
 
 	</head>
 	<body>
@@ -37,9 +40,31 @@
 		</div>
 
 		<!-- Library record -->
+
 		<div id="library-record" data-role="page">
-			<div data-role="content">
+			<!--Header-->
+			<div data-role="header" data-position="fixed">
+				<h1>Libraries</h1>
 			</div>
+			<div data-role="content">
+							<div id="library-details">
+
+							</div>
+				
+				<div data-role="map-canvas" id="map-canvas">
+
+				</div>
+			</div>
+
+			<div data-role="footer" data-position="fixed">		
+				<div data-role="navbar">
+					<ul>
+						<li>
+						<button class="ui-btn ui-icon-back ui-btn-icon-left ui-shadow ui-corner-all">back</button>
+						</li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
 		</div>
 
 	</body>
