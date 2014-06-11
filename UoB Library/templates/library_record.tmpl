@@ -10,17 +10,17 @@
 		{{#if image}}
 		<img src="{{image}}" class="library-thumb" />
 		{{else}}
-		<img src="/images/library-thumb-default.jpg" class="library-thumb" />
+		<img src="images/library-thumb-default.jpg" class="library-thumb" />
 		{{/if}}
 	</div>
 </div><!-- /grid-a -->
 <dl class="clear">
 	{{#if telephone}}
 	<dt>Phone</dt>
-	<dd><a href="phone:{{telephone}}">{{telephone}}</a></dd>
+	<dd><a href="tel:{{telephone}}">{{telephone}}</a></dd>
 	{{/if}}
 	{{#if email}}
 	<dt>Email</dt>
-	<dd><a href="email:{{email}}">{{email}}</a></dd>
+	<dd><a href="mailto:{{email}}">{{email}}</a></dd>
 	{{/if}}
 </dl>
