@@ -18,7 +18,6 @@ $(function() {
 	if ( u.hash.search(reRecord) !== -1 ) {
 		showLibrary( u, data.options );
 		e.preventDefault();
-
 	}
 	
 	if ( u.hash.search(reMap) !== -1 ) {
@@ -26,13 +25,11 @@ $(function() {
 		e.preventDefault();
 	}
 
-	$(document).bind('pagechange', function() {
-		$('.ui-page-active .ui-listview').listview('refresh');
-		$('.ui-page-active :jqmData(role=content)').trigger('create');
-		$(":jqmData(role=navbar)").navbar();
-	});
-
 		}
+	});
+	
+	$(document).on('pageshow', function(){
+		refresh();
 	});
 
 	$('#library-map').on("pageshow", function( event ) {
@@ -57,6 +54,11 @@ function injectHtml(data, templateFile, element, success){
 	});
 }
 
+function refresh() {
+	$('.ui-page-active .ui-listview').listview('refresh');
+	$('.ui-page-active :jqmData(role=content)').trigger('create');
+	$(":jqmData(role=navbar)").navbar();
+}
 
 function showLibrary( urlObj, options)
 {
@@ -69,10 +71,7 @@ function showLibrary( urlObj, options)
 	var library = findLibrary(urlObj, '#library-record?id=');
 
 	$header.children('h1').text(library.name);	
-	injectHtml(library,
-			'templates/library_record.tmpl',
-			$content.children('#library-details'),
-			function() { $('ul').listview().listview('refresh');});
+	injectHtml(library,	'templates/library_record.tmpl', $content.children('#library-details'));
 
 	$page.page();
 	options.dataUrl = urlObj.href;
