@@ -42,7 +42,7 @@ function injectHtml(data, templateFile, element, success){
 }
 
 
-function showLibrary( urlObj, options )
+function showLibrary( urlObj, options)
 {
 
 	pageSelector = urlObj.hash.replace( /\?.*$/, "" );
@@ -55,10 +55,26 @@ function showLibrary( urlObj, options )
 	})[0];
 
 	$header.children('h1').text(library.name);	
-	injectHtml(library, 'templates/library_record.tmpl', $content.children('#library-details'));
+	injectHtml(library,
+			'templates/library_record.tmpl',
+			$content.children('#library-details'),
+			function() { $('ul').listview().listview('refresh');});
+
+	$page.page();
+	options.dataUrl = urlObj.href;
+	$.mobile.changePage( $page, options );
+}
+
+function showMap(urlObj, options) {
+	pageSelector = urlObj.hash.replace( /\?.*$/, "" );
+	var $page = $( pageSelector ),
+			$header = $page.children( ":jqmData(role=header)" ),
+			$content = $page.children( ":jqmData(role=content)" );
+	
 	if((library.lat !== "" && library.lat !== undefined) && (library.long !== "" && library.long !== undefined)){
 		map.setCenter(new google.maps.LatLng(library.lat, library.long) );
 	}
+	
 	$page.page();
 	options.dataUrl = urlObj.href;
 	$.mobile.changePage( $page, options );
@@ -71,5 +87,5 @@ function initMap(){
 	};
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 			mapOptions);
-
 }
+

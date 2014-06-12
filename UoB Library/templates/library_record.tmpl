@@ -10,17 +10,32 @@
 		{{#if image}}
 		<img src="{{image}}" class="library-thumb" />
 		{{else}}
-		<img src="images/library-thumb-default.jpg" class="library-thumb" />
+		<img src="/images/library-thumb-default.jpg" class="library-thumb" />
 		{{/if}}
 	</div>
 </div><!-- /grid-a -->
-<dl class="clear">
+
+<ul data-role="listview" data-inset="true">
 	{{#if telephone}}
-	<dt>Phone</dt>
-	<dd><a href="tel:{{telephone}}">{{telephone}}</a></dd>
+	<li data-icon="phone"><a href="tel:{{telephone}}">Call</a></li>
 	{{/if}}
 	{{#if email}}
-	<dt>Email</dt>
-	<dd><a href="mailto:{{email}}">{{email}}</a></dd>
+	<li data-icon="mail"><a href="mailto:{{email}}">Email</a></li>
 	{{/if}}
-</dl>
+	{{#if lat}}
+	<li data-icon="location"><a href="#library-map">Map</a></li>
+	{{/if}}
+</ul>
+
+<div data-role="collapsible" data-inset="true" data-theme="b" data-content-theme="b">
+	<h2>Opening Hours</h2>
+	<ul data-role="listview" >
+		<li><span class="hours-day">Monday</span> 1000 - 1400</li>
+		<li><span class="hours-day">Tuesday</span> 1000 - 1400</li>
+		<li><span class="hours-day">Wednesday</span> 1000 - 1400</li>
+		<li><span class="hours-day">Thursday</span> 1000 - 1400</li>
+		<li><span class="hours-day">Friday</span> 1000 - 1400</li>
+		<li><span class="hours-day">Saturday</span> 1000 - 1400</li>
+		<li><span class="hours-day">Sunday</span> 1000 - 1400</li>
+	</ul>
+</div>
