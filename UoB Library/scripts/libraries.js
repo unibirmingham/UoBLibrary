@@ -12,17 +12,33 @@ $(function() {
 	$(document).bind( "pagebeforechange", function( e, data ) {
 		if ( typeof data.toPage === "string" ) {
 			var u = $.mobile.path.parseUrl( data.toPage ),
-		re = /^#library-record/;
+		reRecord = /^#library-record/;
+		reMap = /^#library-map/;
 
-	if ( u.hash.search(re) !== -1 ) {
+	if ( u.hash.search(reRecord) !== -1 ) {
 		showLibrary( u, data.options );
 		e.preventDefault();
+
 	}
+	
+	if ( u.hash.search(reMap) !== -1 ) {
+		showMap( u, data.options );
+		e.preventDefault();
+	}
+
+	$(document).bind('pagechange', function() {
+		$('.ui-page-active .ui-listview').listview('refresh');
+		$('.ui-page-active :jqmData(role=content)').trigger('create');
+		$(":jqmData(role=navbar)").navbar();
+	});
+
 		}
 	});
 
-	$('#library-record').on("pageshow", function( event ) {
+	$('#library-map').on("pageshow", function( event ) {
+		var currCenter = map.getCenter();
 		google.maps.event.trigger(map, 'resize');
+		map.setCenter(currCenter);
 	} )
 
 	Handlebars.registerHelper('formattedAddress', function(address) {
@@ -50,9 +66,7 @@ function showLibrary( urlObj, options)
 			$header = $page.children( ":jqmData(role=header)" ),
 			$content = $page.children( ":jqmData(role=content)" );
 
-	var library = jQuery.grep(librariesList.libraries, function(item, i){
-		return item.id == urlObj.hash.replace('#library-record?id=','');
-	})[0];
+	var library = findLibrary(urlObj, '#library-record?id=');
 
 	$header.children('h1').text(library.name);	
 	injectHtml(library,
@@ -65,16 +79,26 @@ function showLibrary( urlObj, options)
 	$.mobile.changePage( $page, options );
 }
 
+function findLibrary(urlObj, urlFragment){
+	return jQuery.grep(librariesList.libraries, function(item, i){
+		return item.id == urlObj.hash.replace(urlFragment,'');
+	})[0];
+
+}
+
 function showMap(urlObj, options) {
 	pageSelector = urlObj.hash.replace( /\?.*$/, "" );
 	var $page = $( pageSelector ),
 			$header = $page.children( ":jqmData(role=header)" ),
 			$content = $page.children( ":jqmData(role=content)" );
-	
+
+	var library = findLibrary(urlObj, "#library-map?id=");
+	$header.children('h1').text(library.name);	
+
 	if((library.lat !== "" && library.lat !== undefined) && (library.long !== "" && library.long !== undefined)){
 		map.setCenter(new google.maps.LatLng(library.lat, library.long) );
 	}
-	
+
 	$page.page();
 	options.dataUrl = urlObj.href;
 	$.mobile.changePage( $page, options );
@@ -82,7 +106,7 @@ function showMap(urlObj, options) {
 
 function initMap(){
 	var mapOptions = {
-		zoom: 18,
+		zoom: 17,
 		center: new google.maps.LatLng(52.450668,-1.930452)
 	};
 	map = new google.maps.Map(document.getElementById('map-canvas'),

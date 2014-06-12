@@ -23,11 +23,11 @@
 	<li data-icon="mail"><a href="mailto:{{email}}">Email</a></li>
 	{{/if}}
 	{{#if lat}}
-	<li data-icon="location"><a href="#library-map">Map</a></li>
+	<li data-icon="location" ><a href="#library-map?id={{id}}" data-transistion="slide">Map</a></li>
 	{{/if}}
 </ul>
 
-<div data-role="collapsible" data-inset="true" data-theme="b" data-content-theme="b">
+<div data-role="collapsible" data-inset="true" >
 	<h2>Opening Hours</h2>
 	<ul data-role="listview" >
 		<li><span class="hours-day">Monday</span> 1000 - 1400</li>
