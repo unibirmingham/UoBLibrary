@@ -19,7 +19,7 @@ $(function() {
 		showLibrary( u, data.options );
 		e.preventDefault();
 	}
-	
+
 	if ( u.hash.search(reMap) !== -1 ) {
 		showMap( u, data.options );
 		e.preventDefault();
@@ -27,10 +27,7 @@ $(function() {
 
 		}
 	});
-	
-	$(document).on('pageshow', function(){
-		refresh();
-	});
+
 
 	$('#library-map').on("pageshow", function( event ) {
 		var currCenter = map.getCenter();
@@ -45,19 +42,16 @@ $(function() {
 });
 
 function injectHtml(data, templateFile, element, success){
-	$.get(templateFile, function(tmpl) {
-		var template = Handlebars.compile(tmpl);
-		element.html(template(data));
-		if(success !== undefined){
-			success();
-		}
-	});
-}
-
-function refresh() {
-	$('.ui-page-active .ui-listview').listview('refresh');
-	$('.ui-page-active :jqmData(role=content)').trigger('create');
-	$(":jqmData(role=navbar)").navbar();
+	jQuery.ajax({
+		url: templateFile,    
+		success: function(tmpl) { var template = Handlebars.compile(tmpl);
+			element.html(template(data));
+			if(success !== undefined){
+				success();
+			}
+		},
+		async: false
+	});  
 }
 
 function showLibrary( urlObj, options)
@@ -71,7 +65,9 @@ function showLibrary( urlObj, options)
 	var library = findLibrary(urlObj, '#library-record?id=');
 
 	$header.children('h1').text(library.name);	
-	injectHtml(library,	'templates/library_record.tmpl', $content.children('#library-details'));
+	element = $content.children('#library-details');
+	injectHtml(library,	'templates/library_record.tmpl', element);
+	element.trigger('create');
 
 	$page.page();
 	options.dataUrl = urlObj.href;
