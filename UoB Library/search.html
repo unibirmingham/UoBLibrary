@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Hello, World</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+		<link href="styles/main.css" rel="stylesheet" />
+		<link href="styles/libraries.css" rel="stylesheet" />
+
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+		<script src="scripts/jquery-1.10.2.min.js"></script>
+		<script src="scripts/jquery.mobile-1.4.2.min.js"></script>
+		<script src="scripts/handlebars-v1.3.0.js" type="text/javascript"></script>
+
+		<script src="scripts/utilities.js" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+	<body>
+
+		<!--List of libraries-->
+		<div id="search-results" data-role="page">
+			<!--Header-->
+			<div data-role="header" data-position="fixed">
+				<h1>moto</h1>
+			</div>
+
+			<!--Content-->
+			<div data-role="content">
+				<div class="bottom-margin" data-position="fixed">
+					<form>
+						<input value="moto" type="search" name="search-1" id="search-1" placeholder="Search...">
+					</form>
+				</div>
+				<ul data-role="listview" data-inset="false" data-scroll="true" id="searchResults">
+					<li><a href="#search-record" data-transition="slide">
+						<h2>MotoVudu</h2>
+						<p>Simon Crafar</p>
+					</a></li>
+					<li><a href="#search-record">
+						<h2>MotoVudu</h2>
+						<p>Simon Crafar</p>
+					</a></li>
+					<li><a href="#search-record">
+						<h2>MotoVudu</h2>
+						<p>Simon Crafar</p>
+					</a></li>
+					<li><a href="#search-record">
+						<h2>MotoVudu</h2>
+						<p>Simon Crafar</p>
+					</a></li>
+				</ul>
+			</div>
+
+			<!--Footer-->
+			<div data-role="footer" data-position="fixed" data-id="oneFooter">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="index.html" data-icon="home">Home</a></li>
+						<li><a href="#" data-icon="back" data-rel="back">Back</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+		</div>
+
+		<!-- Library record -->
+
+		<div id="search-record" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<h1>MotoVudu</h1>
+			</div>
+
+			<div data-role="content">
+				<div id="search-record-details">
+					<div class="status" data-inset="false">
+					<span class="list-item-key">Current Status:</span>On Loan
+					</div>
+
+					<ul data-role="listview" data-inset="true" data-divider-theme="a">
+						<li><span class="list-item-key">Title</span>MotoVudu</li>
+						<li><span class="list-item-key">Author</span>Simon Crafar</li>
+						<li><span class="list-item-key">Due Date</span>26th October 2014 (121 days)</li>
+						<li><span class="list-item-key">Loan Type</span>Short Loan</li>
+						<li><span class="list-item-key">Class Mark</span>123.456</li>
+						<li data-icon="location"><a href="#" data-transistion="slide">Locate</a></li>
+					</ul>
+
+					<button class="ui-btn ui-corner-all">Request Loan</button>
+				</div>
+				<div data-role="footer" data-position="fixed" data-id="twoFooter">
+					<div data-role="navbar">
+						<ul>
+							<li><a href="index.html" data-icon="home">Home</a></li>
+							<li><a href="#" data-icon="back" data-rel="back">Back</a></li>
+						</ul>
+					</div><!-- /navbar -->
+				</div>
+			</div><!-- /page -->
+
+		</body>
+	</html>

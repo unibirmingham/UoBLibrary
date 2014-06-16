@@ -7,28 +7,12 @@
 	clear:both;
 }
 
+.bottom-margin {
+	margin-bottom: 25px;
+}
+
 
 /* Mark Ups */
-
-dd,dl,dt {
-	padding:0;
-	margin:0
-}
-dl {
-	width:100%;
-	overflow:hidden;
-}
-dt {
-	float:left;
-	width:20%; /* adjust the width; make sure the total of both is 100% */
-	margin:10px 0;
-	font-weight:bold;
-}
-dd {
-	float:left;
-	width:80%; /* adjust the width; make sure the total of both is 100% */
-	margin:10px 0;
-}
 
 /* Specifics */
 
@@ -45,7 +29,19 @@ dd {
 
 div[data-role="content"], div[data-role="page"] {height: 100%; }
 
-.hours-day {
+.list-item-key {
 	width: 100px;
+	margin-right: 10px;
 	font-weight: bold;
+}
+
+.status {
+	font-family: monospace;
+	border-bottom: 2px dashed;
+	border-top: 2px dashed;
+	padding: 10px 0;
+	text-align: center;
+	background:rgb(243, 108, 108);
+	font-size: 16px;
+	text-shadow:none;
 }

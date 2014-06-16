@@ -89,9 +89,16 @@ function showMap(urlObj, options) {
 
 	var library = findLibrary(urlObj, "#library-map?id=");
 	$header.children('h1').text(library.name);	
+	var libLatLng = new google.maps.LatLng(library.lat, library.long); 
 
 	if((library.lat !== "" && library.lat !== undefined) && (library.long !== "" && library.long !== undefined)){
-		map.setCenter(new google.maps.LatLng(library.lat, library.long) );
+		map.setCenter(libLatLng);
+
+		var marker = new google.maps.Marker({
+			position: libLatLng,
+			map: map,
+			title: library.name 
+		});
 	}
 
 	$page.page();

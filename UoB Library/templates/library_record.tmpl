@@ -26,13 +26,10 @@
 	<li data-icon="location" ><a href="#library-map?id={{id}}" data-transistion="slide">Map</a></li>
 	{{/if}}
 </ul>
-	<ul data-role="listview" data-inset="true" data-divider-theme="a">
-		<li data-role="list-divider">Opening Hours</li>
-		<li><span class="hours-day">Monday</span> 1000 - 1400</li>
-		<li><span class="hours-day">Tuesday</span> 1000 - 1400</li>
-		<li><span class="hours-day">Wednesday</span> 1000 - 1400</li>
-		<li><span class="hours-day">Thursday</span> 1000 - 1400</li>
-		<li><span class="hours-day">Friday</span> 1000 - 1400</li>
-		<li><span class="hours-day">Saturday</span> 1000 - 1400</li>
-		<li><span class="hours-day">Sunday</span> 1000 - 1400</li>
-	</ul>
+
+<ul data-role="listview" data-inset="true" data-divider-theme="a">
+	<li data-role="list-divider">Opening Hours</li>
+	{{#each openingHours}}
+	<li><span class="list-item-key">{{@key}}</span> {{this}}</li>
+	{{/each}}
+</ul>

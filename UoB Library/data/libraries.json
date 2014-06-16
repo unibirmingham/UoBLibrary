@@ -8,7 +8,18 @@
 		"lat": 52.451464,
 		"long": -1.930295,
 		"image": "images/main-library.jpg",
-		"address":"The Main Library,University of Birmingham,Edgbaston,Birmingham,B15 2TT"
+		"address":"The Main Library,University of Birmingham,Edgbaston,Birmingham,B15 2TT",
+		"openingHours":
+		{
+			"Monday":"0800 - 1400",
+			"Tuesday":"0800 - 1400",
+			"Wednesday":"0800 - 1400",
+			"Thursday":"0800 - 1400",
+			"Friday":"0800 - 1400",
+			"Saturday":"0800 - 1400",
+			"Sunday":"0800 - 1400"
+		}
+
 	},
 	{
 		"id": "2",
