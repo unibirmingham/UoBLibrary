@@ -3,31 +3,10 @@ var librariesList;
 $(function() {
 	google.maps.event.addDomListener(window, "load", initMap);
 
-	$.getJSON("data/libraries.json", function(data){
-		librariesList = data;
-		var libraryList = $('#libraryList');
-		injectHtml(data, 'templates/libraries.tmpl', libraryList, function(){libraryList.listview("refresh");});
-	});
+	loadLibraries();
 
-	$(document).bind( "pagebeforechange", function( e, data ) {
-		if ( typeof data.toPage === "string" ) {
-			var u = $.mobile.path.parseUrl( data.toPage ),
-		reRecord = /^#library-record/;
-		reMap = /^#library-map/;
-
-	if ( u.hash.search(reRecord) !== -1 ) {
-		showLibrary( u, data.options );
-		e.preventDefault();
-	}
-
-	if ( u.hash.search(reMap) !== -1 ) {
-		showMap( u, data.options );
-		e.preventDefault();
-	}
-
-		}
-	});
-
+	route('library-record', showLibrary);
+	route('library-map', showMap);
 
 	$('#library-map').on("pageshow", function( event ) {
 		var currCenter = map.getCenter();
@@ -41,69 +20,49 @@ $(function() {
 
 });
 
-function injectHtml(data, templateFile, element, success){
-	jQuery.ajax({
-		url: templateFile,    
-		success: function(tmpl) { var template = Handlebars.compile(tmpl);
-			element.html(template(data));
-			if(success !== undefined){
-				success();
-			}
-		},
-		async: false
-	});  
+function loadLibraries() {
+	$.getJSON("data/libraries.json", function(data){
+		librariesList = data;
+		var libraryList = $('#libraryList');
+		injectHtml(data, 'templates/libraries.tmpl', libraryList, function(){libraryList.listview("refresh");});
+	});
 }
 
 function showLibrary( urlObj, options)
 {
+	showPage(urlObj, options, function(page) {	
+		var library = findLibrary(urlObj, "#library-record?id=");
+		page.header.children('h1').text(library.name);	
+		element = page.content.children('#library-details');
+		injectHtml(library,	'templates/library_record.tmpl', element);
+		element.trigger('create');
 
-	pageSelector = urlObj.hash.replace( /\?.*$/, "" );
-	var $page = $( pageSelector ),
-			$header = $page.children( ":jqmData(role=header)" ),
-			$content = $page.children( ":jqmData(role=content)" );
+		options.transition = 'slide';
+	})
+}
 
-	var library = findLibrary(urlObj, '#library-record?id=');
+function showMap(urlObj, options) {
+	showPage(urlObj, options, function(page) {	
+		var library = findLibrary(urlObj, "#library-map?id=");
+		page.header.children('h1').text(library.name);	
+		var libLatLng = new google.maps.LatLng(library.lat, library.long); 
 
-	$header.children('h1').text(library.name);	
-	element = $content.children('#library-details');
-	injectHtml(library,	'templates/library_record.tmpl', element);
-	element.trigger('create');
+		if((library.lat !== "" && library.lat !== undefined) && (library.long !== "" && library.long !== undefined)){
+			map.setCenter(libLatLng);
 
-	$page.page();
-	options.dataUrl = urlObj.href;
-	$.mobile.changePage( $page, options );
+			var marker = new google.maps.Marker({
+				position: libLatLng,
+					map: map,
+					title: library.name 
+			});
+		}
+	});
 }
 
 function findLibrary(urlObj, urlFragment){
 	return jQuery.grep(librariesList.libraries, function(item, i){
 		return item.id == urlObj.hash.replace(urlFragment,'');
 	})[0];
-
-}
-
-function showMap(urlObj, options) {
-	pageSelector = urlObj.hash.replace( /\?.*$/, "" );
-	var $page = $( pageSelector ),
-			$header = $page.children( ":jqmData(role=header)" ),
-			$content = $page.children( ":jqmData(role=content)" );
-
-	var library = findLibrary(urlObj, "#library-map?id=");
-	$header.children('h1').text(library.name);	
-	var libLatLng = new google.maps.LatLng(library.lat, library.long); 
-
-	if((library.lat !== "" && library.lat !== undefined) && (library.long !== "" && library.long !== undefined)){
-		map.setCenter(libLatLng);
-
-		var marker = new google.maps.Marker({
-			position: libLatLng,
-			map: map,
-			title: library.name 
-		});
-	}
-
-	$page.page();
-	options.dataUrl = urlObj.href;
-	$.mobile.changePage( $page, options );
 }
 
 function initMap(){
@@ -114,4 +73,3 @@ function initMap(){
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 			mapOptions);
 }
-
