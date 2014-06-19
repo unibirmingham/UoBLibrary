@@ -2,7 +2,12 @@
 <li>
 <a href="#search-record?recordid={{PrimoNMBib.record.control.recordid}}" data-transition="slide">
 <h2>{{PrimoNMBib.record.display.title}}</h2>
-<p>{{PrimoNMBib.record.display.creator}}</p>
+<p><em>{{PrimoNMBib.record.display.creator}}</em></p>
+<p><strong>{{PrimoNMBib.record.display.type}}</strong></p>
 </a>
 </li>
+{{else}}
+<div class="ui-body">
+<p>I'm terribly sorry but your search for <span class="bold">{{searchTerm}}</span> yielded no results
+</div>
 {{/each}}

@@ -10,7 +10,7 @@ $(function() {
 			function(xml){ 
 				var json = $.xml2json(xml);
 				listOfResults = $('#search-result-list');
-				searchResults = { searchResults: json.JAGROOT.RESULT.DOCSET.DOC };
+				searchResults = { searchResults: json.JAGROOT.RESULT.DOCSET.DOC, searchTerm: searchTerm };
 				injectHtml(searchResults, 'templates/search_results.tmpl', listOfResults);
 				listOfResults.listview().listview('refresh');
 			}); 
