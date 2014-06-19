@@ -38,6 +38,5 @@ function showPage(urlObj, options, renderPage)
 
 	$page.page();
 	options.dataUrl = urlObj.href;
-	options.transition = 'slide';
 	$.mobile.changePage( $page, options );
 }
