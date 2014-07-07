@@ -1,9 +1,9 @@
 {{#each records}}
 <li>
-<a href="#search-record?recordid={{httpEncoded PrimoNMBib.record.control.recordid}}" data-ajax="false">
-<h2>{{PrimoNMBib.record.display.title}}</h2>
-<p><em>{{PrimoNMBib.record.display.creator}}</em></p>
-<p><strong>{{PrimoNMBib.record.display.type}}</strong></p>
+<a href="#search-record?recordid={{httpEncoded record_id}}" data-ajax="false">
+<h2>{{title}}</h2>
+<p><em>{{author}}</em></p>
+<p><strong>{{type}}</strong></p>
 </a>
 </li>
 
@@ -12,6 +12,3 @@
 <p class="center">I'm terribly sorry but your search for <span class="bold">{{searchTerm}}</span> yielded no results
 </div>
 {{/each}}
-{{#if records}}
-<button id="next-resultsh-button" class="ui-btn ui-icon-arrow-d ui-btn-icon-right">Next 10</button>
-{{/if}}

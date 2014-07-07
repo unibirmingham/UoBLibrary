@@ -12,17 +12,25 @@ function route(pageId, success){
 	});
 }
 
-function injectHtml(data, templateFile, element, success){
+function buildHtml(data, templateFile, element, success, handleHtml){
 	jQuery.ajax({
 		url: templateFile,    
 		success: function(tmpl) { var template = Handlebars.compile(tmpl);
-			element.html(template(data));
+			handleHtml(template(data));
 			if(success !== undefined){
 				success();
 			}
 		},
 		async: false
-	});  
+	});
+}
+
+function injectHtml(data, templateFile, element, success){
+	buildHtml(data, templateFile, element, success, function(html) { element.html(html) });
+}
+
+function appendHtml(data, templateFile, element, success){
+	buildHtml(data, templateFile, element, success, function(html) { element.append(html) });
 }
 
 function showPage(urlObj, options, renderPage)

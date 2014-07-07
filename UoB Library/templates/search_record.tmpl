@@ -1,14 +1,57 @@
 <div class="status" data-inset="false">
-<span class="list-item-key">Current Status:</span>On Loan
 </div>
 
 <ul data-role="listview" data-inset="true" data-divider-theme="a">
-<li><span class="list-item-key">Title</span>{{display.title}}</li>
-<li><span class="list-item-key">Author</span>{{display.creator}}</li>
-<li><span class="list-item-key">Due Date</span>26th October 2014 (121 days)</li>
-<li><span class="list-item-key">Loan Type</span>Short Loan</li>
-<li><span class="list-item-key">Class Mark</span>123.456</li>
+<li><span class="list-item-key">Title</span>{{title}}</li>
+{{#if author }}
+<li><span class="list-item-key">Author</span>{{author}}</li>
+{{/if}}
+{{#if publisher }}
+<li><span class="list-item-key">Publisher</span>{{publisher}}</li>
+{{/if}}
+{{#if edition }}
+<li><span class="list-item-key">Edition</span>{{edition}}</li>
+{{/if}}
+{{#if standard_number }}
+<li><span class="list-item-key">{{standard_number_type}}</span>{{standard_number}}</li>
+{{/if}}
 <li data-icon="location"><a href="#" data-transistion="slide">Locate</a></li>
 </ul>
 
-<button class="ui-btn ui-corner-all">Request Loan</button>
+{{#if groupedItems}}
+
+{{#each groupedItems}}
+<h2>{{ @key }}</h2>
+<table data-role="table" id="items" data-mode="reflow" class="ui-responsive">
+<thead>
+<tr>
+<th>Barcode</th>
+<th>Loan Type</th>
+<th>Status</th>
+<th>Due Date</th>
+<th>Class Mark</th>
+</tr>
+</thead>
+<tbody>
+{{#each this }}
+{{#if isAvailable}}
+<tr class="status available">
+{{ else }}
+<tr class="status on-loan">
+{{/if}}
+<td>{{barcode}}</td>
+<td>{{item_status}}</td>
+<td>{{lookUpLoanStatus loan_status}}</td>
+<td>
+{{#if loan_due_date}}
+{{formattedLoanDueDate loan_due_date}}
+{{/if}}
+</td>
+<td>{{class_mark}}</td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+
+{{/each}}
+{{/if}}

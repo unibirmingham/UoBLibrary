@@ -1,28 +1,57 @@
 var searchResults;
+var nextTenButton;
 
 $(function() {
 	route('search-record', showSearchRecord);
+	nextTenButton = $('#next-ten-button');
 
 	$('#search-button').click(function(e){
 		var searchTerm = $('#search-box').val();
 		$('.ui-page-active h1').text(searchTerm);
-		$.get('http://findit-s.bham.ac.uk:1701/PrimoWebServices/xservice/search/brief?institution=44BIR&onCampus=false&query=any,contains,' + searchTerm + '&indx=1&bulkSize=10&dym=true&highlight=true&lang=eng',
-			function(xml){ 
-				var json = $.xml2json(xml);
-				listOfResults = $('#search-result-list');
-				searchResults = { records: json.JAGROOT.RESULT.DOCSET.DOC, searchTerm: searchTerm };
-				injectHtml(searchResults, 'templates/search_results.tmpl', listOfResults);
-				listOfResults.listview().listview('refresh');
-			}); 
+		nextTenButton.data("index", 1);
+		getSearchResults(searchTerm, null, injectHtml);
+		e.preventDefault();
+	});
+
+	nextTenButton.click(function(e) {
+		searchTerm = $('#search-box').val();
+		getSearchResults(searchTerm, nextTenButton.data('index'), appendHtml);
 		e.preventDefault();
 	});
 
 });
 
+function getSearchResults(searchTerm, index, templateResults){
+	$.get(getSearchUrl(searchTerm, index), function(json){ 
+		listOfResults = $('#search-result-list');
+		searchResults = { records: json, searchTerm: searchTerm };
+		templateResults(searchResults, 'templates/search_results.tmpl', listOfResults);
+		listOfResults.listview().listview('refresh');
+		nextTenButton.data("index", nextTenButton.data("index")+ 10);
+
+		if(json.length < 10){
+			nextTenButton.hide();
+		}
+		else {
+			nextTenButton.show();
+		}
+	}); 
+}
+
+function getSearchUrl(searchTerm, index){
+	url = 'http://localhost:3001/library/search/?q=' + searchTerm;
+	url += '&size=10';
+	if(index){
+		url += '&index=' + index
+	}
+	return url;
+}
+
 function showSearchRecord(urlObj, options){
 	showPage(urlObj, options, function(page) {	
 		var result = findSearchResult(urlObj, "#search-record?recordid=");
-		page.header.children('h1').text(result.display.title);	
+		groupItemsFor(result);
+		page.header.children('h1').text(result.title);	
 		element = page.content.children('#search-record-details');
 		injectHtml(result,	'templates/search_record.tmpl', element);
 		element.trigger('create');
@@ -33,12 +62,51 @@ function showSearchRecord(urlObj, options){
 }
 
 function findSearchResult(urlObj, urlFragment){
-	return jQuery.grep(searchResults.records, function(item, i){
-		var param = urlObj.hash.replace(urlFragment, '');
-		return item.PrimoNMBib.record.control.recordid === decodeURIComponent(param);
-	})[0].PrimoNMBib.record;
+	var record_id = urlObj.hash.replace(urlFragment, '');
+	var json;
+	$.ajax({
+		url: 'http://localhost:3001/library/work/' + record_id,    
+		success: function(response) { 
+			json = response;
+		},
+		async: false
+	});
+	return json;
+}
+
+function groupItemsFor(searchResult){
+	if (searchResult.items !== undefined || searchResult.items.length > 0){
+		groupedItems = {};
+		$.each(searchResult.items, function(i, item){
+			if(groupedItems[item.location] === undefined){
+				groupedItems[item.location] = [item];
+			}
+			else {
+				groupedItems[item.location].push(item)
+			}
+			item.isAvailable = isAvailable;
+		});
+		searchResult["groupedItems"] = groupedItems;
+	}
+}
+
+function isAvailable() {
+	return this.loan_status !== "A";
 }
 
 Handlebars.registerHelper('httpEncoded', function(text) {
 	return encodeURIComponent(text);
 });
+
+Handlebars.registerHelper('lookUpLoanStatus', function(text) {
+	if(text === "A"){
+		return "On Loan"
+	}
+	return "Available"
+});
+
+Handlebars.registerHelper('formattedLoanDueDate', function(text) {
+	returnDate = moment(text, "YYYYMMDD");
+	return returnDate.fromNow() + ' (' + returnDate.format("Do MMMM YYYY") + ')';
+		});
+
