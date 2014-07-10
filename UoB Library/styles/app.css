@@ -44,12 +44,17 @@ div[data-role="content"], div[data-role="page"] {height: 100%; }
 }
 
 .status {
-	font-family: monospace;
-	border-bottom: 2px dashed;
-	border-top: 2px dashed;
-	padding: 10px 0;
-	text-align: center;
-	background:rgb(243, 108, 108);
-	font-size: 16px;
 	text-shadow:none;
+}
+
+.on-loan {
+	background:rgb(243, 108, 108);
+}
+
+.available {
+	background: rgb(133, 233, 102);
+}
+
+#next-ten-button {
+	margin-top: 25px;
 }
