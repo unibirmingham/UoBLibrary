@@ -39,7 +39,7 @@ function getSearchResults(searchTerm, index, templateResults){
 }
 
 function getSearchUrl(searchTerm, index){
-	url = 'http://localhost:3001/library/search/?q=' + searchTerm;
+	url = 'http://butler.bham.ac.uk/library/search/?q=' + searchTerm;
 	url += '&size=10';
 	if(index){
 		url += '&index=' + index
@@ -65,7 +65,7 @@ function findSearchResult(urlObj, urlFragment){
 	var record_id = urlObj.hash.replace(urlFragment, '');
 	var json;
 	$.ajax({
-		url: 'http://localhost:3001/library/work/' + record_id,    
+		url: 'http://butler.bham.ac.uk/library/work/' + record_id,    
 		success: function(response) { 
 			json = response;
 		},
