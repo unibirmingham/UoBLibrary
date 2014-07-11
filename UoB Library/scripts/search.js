@@ -65,7 +65,7 @@ function findSearchResult(urlObj, urlFragment){
 	var record_id = urlObj.hash.replace(urlFragment, '');
 	var json;
 	$.ajax({
-		url: 'http://butler.bham.ac.uk/library/work/' + record_id,    
+		url: 'http://butler.bham.ac.uk/library/works/' + record_id,    
 		success: function(response) { 
 			json = response;
 		},
