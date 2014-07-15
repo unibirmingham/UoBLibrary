@@ -35,6 +35,7 @@ function getSearchResults(searchTerm, index, templateResults){
 		else {
 			nextTenButton.show();
 		}
+		hidePageLoadingMessage();
 	}); 
 }
 
@@ -84,7 +85,7 @@ function groupItemsFor(searchResult){
 			else {
 				groupedItems[item.location].push(item)
 			}
-			item.isAvailable = isAvailable;
+		item.isAvailable = isAvailable;
 		});
 		searchResult["groupedItems"] = groupedItems;
 	}

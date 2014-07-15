@@ -16,6 +16,7 @@
 		<script src="scripts/moment.js" type="text/javascript" language="javascript"></script>
 
 		<script src="scripts/page_routing.js" type="text/javascript" charset="utf-8"></script>
+		<script src="scripts/page_loading.js" type="text/javascript" charset="utf-8"></script>
 		<script src="scripts/search.js" type="text/javascript" charset="utf-8"></script>
 
 	</head>
@@ -33,7 +34,7 @@
 				<div class="bottom-margin" data-position="fixed">
 					<form>
 						<input type="search" name="search-1" id="search-box" placeholder="Search...">
-						<button id="search-button" class="ui-btn">Search</button>
+						<button id="search-button" class="ui-btn show-page-loading-msg" data-inline="true" >Search</button>
 					</form>
 				</div>
 				<ul data-role="listview" data-inset="false" data-scroll="true" id="search-result-list">
