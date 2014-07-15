@@ -46,5 +46,6 @@ function showPage(urlObj, options, renderPage)
 
 	$page.page();
 	options.dataUrl = urlObj.href;
+    options.showLoadingMsg = true;
 	$.mobile.changePage( $page, options );
 }
